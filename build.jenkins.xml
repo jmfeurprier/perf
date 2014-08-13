@@ -31,23 +31,23 @@
 	</target>
 
 	<target name="phpunit">
-		<exec command="${rootdir}/bin/phpunit -c ${rootdir}/phpunit.xml --colors --log-junit ${rootdir}/build/logs/junit.xml --coverage-clover ${rootdir}/build/logs/clover.xml --coverage-html ${rootdir}/build/coverage/ --coverage-crap4j ${rootdir}/build/logs/crap4j.xml" logoutput="true" passthru="true" />
+		<exec command="${rootdir}/vendor/bin/phpunit -c ${rootdir}/phpunit.xml --colors --log-junit ${rootdir}/build/logs/junit.xml --coverage-clover ${rootdir}/build/logs/clover.xml --coverage-html ${rootdir}/build/coverage/ --coverage-crap4j ${rootdir}/build/logs/crap4j.xml" logoutput="true" passthru="true" />
 	</target>
 
 	<target name="phpcs">
-		<exec command="${rootdir}/bin/phpcs -p --extensions=php --standard=PSR2 --report=checkstyle --report-file=${rootdir}/build/logs/checkstyle.xml ${rootdir}/lib" escape="false" logoutput="true" passthru="true" />
+		<exec command="${rootdir}/vendor/bin/phpcs -p --extensions=php --standard=PSR2 --report=checkstyle --report-file=${rootdir}/build/logs/checkstyle.xml ${rootdir}/lib" escape="false" logoutput="true" passthru="true" />
 	</target>
 
 	<target name="phpmd">
-		<exec command="${rootdir}/bin/phpmd ${rootdir}/lib xml codesize,unusedcode,design --reportfile ${rootdir}/build/logs/pmd.xml" logoutput="true" passthru="true" />
+		<exec command="${rootdir}/vendor/bin/phpmd ${rootdir}/lib xml codesize,unusedcode,design --reportfile ${rootdir}/build/logs/pmd.xml" logoutput="true" passthru="true" />
 	</target>
 
 	<target name="phpcpd">
-		<exec command="${rootdir}/bin/phpcpd --min-lines 7 --min-tokens 65 --log-pmd ${rootdir}/build/logs/pmd-cpd.xml ${rootdir}/lib" logoutput="true" passthru="true" />
+		<exec command="${rootdir}/vendor/bin/phpcpd --min-lines 7 --min-tokens 65 --log-pmd ${rootdir}/build/logs/pmd-cpd.xml ${rootdir}/lib" logoutput="true" passthru="true" />
 	</target>
 
 	<target name="phploc">
-		<exec command="${rootdir}/bin/phploc --log-csv ${rootdir}/build/logs/phploc.csv ${rootdir}/lib" logoutput="true" passthru="true" />
+		<exec command="${rootdir}/vendor/bin/phploc --log-csv ${rootdir}/build/logs/phploc.csv ${rootdir}/lib" logoutput="true" passthru="true" />
 	</target>
 
 </project>
