@@ -1,6 +1,7 @@
 <?php
 
-require(dirname(__FILE__) . '/../../lib/perf/Bootstrap.php');
+$rootPath = realpath(__DIR__ . '/../..') . '/';
 
-$bootstrap = new \perf\Bootstrap();
-$bootstrap->init();
+require($rootPath . 'lib/perf/Autoloader.php');
+
+\perf\Autoloader::register($rootPath . 'lib/perf')->setClassPrefix('perf');
