@@ -93,7 +93,9 @@ class EntityMetadataPool
             try {
                 $entityMetadata = $this->getEntityAnnotationParser()->parse($entityClass);
             } catch (\Exception $e) {
-                throw new \RuntimeException("Failed to parse entity class '{$entityClass}' annotations. << {$e->getMessage()}", 0, $e);
+                $message = "Failed to parse entity class '{$entityClass}' annotations. << {$e->getMessage()}";
+
+                throw new \RuntimeException($message, 0, $e);
             }
 
             $this->storeEntityMetadata($entityMetadata);

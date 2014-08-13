@@ -8,7 +8,7 @@ use \perf\Caching\CacheEntry;
  *
  *
  */
-class Cache_MemcachedClient implements \perf\Caching\Storage
+class MemcachedClient implements \perf\Caching\Storage
 {
 
     /**
