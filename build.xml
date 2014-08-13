@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<project basedir="." default="help">
+
+	<property name="rootdir" value="${project.basedir}" override="true" />
+
+	<target name="help">
+		<echo message="Available targets" />
+		<echo message="=================" />
+		<echo message="phing install        Installs project" />
+		<echo message="phing install-devkit Installs developer tools" />
+		<echo message="phing phpunit        Runs unit tests" />
+		<echo message="phing phpcs          Runs PHP code style validation" />
+		<echo message="phing phpcpd         Runs PHP code duplication detector" />
+		<echo message="phing phpmd          Runs PHP mess detector" />
+		<echo message="phing codecheck      Calls every quality tool" />
+		<echo message="phing code-coverage  Runs unit tests and generates code coverage report" />
+		<echo message="phing help           Shows this help screen" />
+	</target>
+
+	<target name="install">
+		<exec command="composer update --no-dev" passthru="true" />
+	</target>
+
+	<target name="install-devkit">
+		<exec command="composer update" passthru="true" />
+		<if>
+			<available file="${rootdir}/build/" type="dir" />
+			<then>
+				<delete dir="${rootdir}/build/" />
+			</then>
+		</if>
+		<mkdir dir="${rootdir}/build/coverage/" />
+	</target>
+
+	<target name="phpunit">
+		<exec command="${rootdir}/tool/bin/phpunit -c ${rootdir}/phpunit.xml" checkreturn="false" logoutput="true" passthru="true" />
+	</target>
+
+	<target name="phpcs" description="PHP code style validation">
+		<exec command="${rootdir}/tool/bin/phpcs -p --extensions=php --standard=PSR2 --report=full ${rootdir}/lib" escape="false" logoutput="true" passthru="true" />
+	</target>
+
+	<target name="phpcpd" description="PHP code duplication detector">
+		<exec command="${rootdir}/tool/bin/phpcpd --min-lines 7 --min-tokens 65 ${rootdir}/lib" checkreturn="false" logoutput="true" passthru="true" />
+	</target>
+
+	<target name="phpmd" description="PHP mess detector">
+		<exec command="${rootdir}/tool/bin/phpmd ${rootdir}/lib text codesize,unusedcode,design" checkreturn="false" logoutput="true" passthru="true" />
+	</target>
+
+	<target name="codecheck" depends="phpunit,phpcs,phpcpd,phpmd" />
+
+	<target name="code-coverage">
+		<exec command="${rootdir}/tool/bin/phpunit --coverage-html ${rootdir}/build/coverage/ -c ${rootdir}/phpunit.xml" checkreturn="false" logoutput="true" passthru="true" />
+	</target>
+
+</project>
