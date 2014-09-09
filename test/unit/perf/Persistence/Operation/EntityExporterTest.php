@@ -62,9 +62,11 @@ class EntityExporterTest extends \PHPUnit_Framework_TestCase
         $this->assertInternalType('array', $result);
         $this->assertCount(3, $result);
         $this->assertArrayHasKey($columnNamePrimary, $result);
-        $this->assertSame($propertyValuePrimary, $result[$columnNamePrimary]);
+        $this->assertInternalType('string', $result[$columnNamePrimary]);
+        $this->assertEquals($propertyValuePrimary, $result[$columnNamePrimary]);
         $this->assertArrayHasKey($columnNameSecondary, $result);
-        $this->assertSame($propertyValueSecondary, $result[$columnNameSecondary]);
+        $this->assertInternalType('string', $result[$columnNameSecondary]);
+        $this->assertEquals($propertyValueSecondary, $result[$columnNameSecondary]);
         $this->assertArrayHasKey($columnNameTertiary, $result);
         $this->assertSame($propertyValueTertiary, $result[$columnNameTertiary]);
     }
