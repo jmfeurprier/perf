@@ -94,7 +94,7 @@ class DocBlockParser
     private function init($docBlock)
     {
         if (!is_string($docBlock)) {
-            throw new \InvalidArgumentException();
+            throw new \InvalidArgumentException('Doc block type is not valid (expected string).');
         }
 
         $this->docBlock = $docBlock;

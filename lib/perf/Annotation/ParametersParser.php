@@ -60,6 +60,7 @@ class ParametersParser
     /**
      *
      *
+     * @return void
      */
     private function name()
     {
@@ -69,6 +70,7 @@ class ParametersParser
     /**
      *
      *
+     * @return void
      */
     private function equals()
     {
@@ -78,6 +80,7 @@ class ParametersParser
     /**
      *
      *
+     * @return void
      */
     private function doubleQuote()
     {
@@ -87,6 +90,7 @@ class ParametersParser
     /**
      *
      *
+     * @return void
      */
     private function value()
     {
@@ -98,6 +102,7 @@ class ParametersParser
     /**
      *
      *
+     * @return void
      */
     private function comma()
     {
@@ -115,7 +120,10 @@ class ParametersParser
         $matches = array();
 
         if (1 !== preg_match($pattern, $this->parametersString, $matches)) {
-            throw new \RuntimeException();
+            $message = "Parameters annotation '{$this->parametersString}' "
+                     . "does not match expected pattern '{$pattern}'.";
+
+            throw new \RuntimeException($message);
         }
 
         $match       = $matches[1];
@@ -135,7 +143,10 @@ class ParametersParser
     private function expectString($expectedString)
     {
         if (0 !== strpos($this->parametersString, $expectedString)) {
-            throw new \RuntimeException();
+            $message = "Parameters annotation '{$this->parametersString}' "
+                     . "does not match expected string '{$expectString}'.";
+
+            throw new \RuntimeException($message);
         }
 
         $stringLength = strlen($expectedString);
@@ -146,7 +157,7 @@ class ParametersParser
     /**
      *
      *
-     * @param int $lenght
+     * @param int $length
      * @return void
      */
     private function chopLeft($length)
@@ -157,6 +168,7 @@ class ParametersParser
     /**
      *
      *
+     * @return bool
      */
     private function nothingMoreToParse()
     {

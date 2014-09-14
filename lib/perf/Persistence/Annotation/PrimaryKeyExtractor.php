@@ -85,6 +85,7 @@ class PrimaryKeyExtractor
     {
         foreach ($columns as $column) {
             $propertyName = $column->getPropertyName();
+
             $this->columns[$propertyName] = $column;
         }
 
@@ -108,7 +109,7 @@ class PrimaryKeyExtractor
             $propertyPrimaryKeyAnnotations = array();
 
             foreach ($propertyAnnotations as $annotation) {
-                if ('perf\Persistence\PrimaryKey' === $annotation->getKey()) {
+                if ('perf\\Persistence\\PrimaryKey' === $annotation->getKey()) {
                     $propertyPrimaryKeyAnnotations[] = $annotation;
                 }
             }
@@ -120,7 +121,7 @@ class PrimaryKeyExtractor
             }
 
             if ($propertyPrimaryKeyAnnotationCount > 1) {
-                throw new \RuntimeException();
+                throw new \RuntimeException("More than one primary key annotation found for property '{$propertyName}'.");
             }
 
             $propertyPrimaryKeyAnnotation = reset($propertyPrimaryKeyAnnotations);
@@ -147,7 +148,7 @@ class PrimaryKeyExtractor
 
         foreach (array_keys($this->primaryKeyAnnotations) as $propertyName) {
             if (!array_key_exists($propertyName, $this->columns)) {
-                throw new \RuntimeException();
+                throw new \RuntimeException("Primary key column '{$propertyName}' not found.");
             }
 
             $primaryKeyColumns[] = $this->columns[$propertyName];
@@ -172,8 +173,14 @@ class PrimaryKeyExtractor
             $strategies[$strategy] = $strategy;
         }
 
-        if (1 !== count($strategies)) {
-            throw new \RuntimeException();
+        $strategyCount = count($strategies);
+
+        if ($strategyCount < 1) {
+            throw new \RuntimeException("No primary key strategy defined.");
+        }
+
+        if ($strategyCount > 1) {
+            throw new \RuntimeException("More than one primary key strategy defined.");
         }
 
         $strategy = reset($strategies);
@@ -185,6 +192,7 @@ class PrimaryKeyExtractor
      *
      *
      * @return PrimaryKey
+     * @throws \RuntimeException
      */
     private function conclude()
     {

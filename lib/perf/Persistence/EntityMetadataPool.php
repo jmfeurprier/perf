@@ -80,7 +80,7 @@ class EntityMetadataPool
     public function fetch($entityClass)
     {
         if (!is_string($entityClass)) {
-            throw new \InvalidArgumentException();
+            throw new \InvalidArgumentException('Invalid entity class type (expected string).');
         }
 
         if (!$this->cacheRestored) {
@@ -121,7 +121,7 @@ class EntityMetadataPool
             $entityMetadatas = $cacheFetchResult->data();
 
             if (!is_array($entityMetadatas)) {
-                throw new \RuntimeException();
+                throw new \RuntimeException('Invalid entity metadatas restored from cache.');
             }
 
             foreach ($entityMetadatas as $entityMetadata) {
