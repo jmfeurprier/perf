@@ -98,7 +98,7 @@ class CacheClient
      * @param null|int $maxLifetimeSeconds (Optional) duration in seconds after which cache file will be
      *      considered expired.
      * @return CacheClient Fluent return.
-     * @throws \Exception
+     * @throws \RuntimeException
      */
     public function store($id, $data, $maxLifetimeSeconds = null)
     {

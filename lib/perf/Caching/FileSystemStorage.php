@@ -1,15 +1,13 @@
 <?php
 
-namespace perf\Caching\Storage;
-
-use \perf\Caching\CacheEntry;
+namespace perf\Caching;
 
 /**
  *
  *
  * @package perf
  */
-class FileSystem implements \perf\Caching\Storage
+class FileSystemStorage implements Storage
 {
 
     /**
@@ -101,7 +99,9 @@ class FileSystem implements \perf\Caching\Storage
     {
         $cacheFilePath = $this->getCacheFilePath($id);
 
-        unlink($cacheFilePath);
+        if (!unlink($cacheFilePath)) {
+            throw new \RuntimeException("Failed to delete cache file '{$cacheFilePath}'.");
+        }
     }
 
     /**
@@ -114,13 +114,11 @@ class FileSystem implements \perf\Caching\Storage
     {
         static $mask = '*.cache';
 
-        foreach (glob($this->basePath . $mask) as $filename) {
-            if (!unlink($filename)) {
-                throw new \RuntimeException("Failed to delete cache file '{$filename}'.");
+        foreach (glob($this->basePath . $mask) as $cacheFilePath) {
+            if (!unlink($cacheFilePath)) {
+                throw new \RuntimeException("Failed to delete cache file '{$cacheFilePath}'.");
             }
         }
-
-        // @todo
     }
 
     /**

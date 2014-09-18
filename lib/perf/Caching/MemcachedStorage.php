@@ -1,14 +1,12 @@
 <?php
 
-namespace perf\Caching\Storage;
-
-use \perf\Caching\CacheEntry;
+namespace perf\Caching;
 
 /**
  *
  *
  */
-class MemcachedClient implements \perf\Caching\Storage
+class MemcachedStorage implements Storage
 {
 
     /**

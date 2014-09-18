@@ -1,23 +1,14 @@
 <?php
 
-namespace perf\Caching\Storage;
-
-use \perf\Caching\CacheEntry;
+namespace perf\Caching;
 
 /**
  *
  *
  * @package perf
  */
-class Volatile implements \perf\Caching\Storage
+class NullStorage implements Storage
 {
-
-    /**
-     * Cached entries.
-     *
-     * @var {string:CacheEntry}
-     */
-    private $entries = array();
 
     /**
      * Attempts to store provided cache entry into storage.
@@ -27,7 +18,6 @@ class Volatile implements \perf\Caching\Storage
      */
     public function store(CacheEntry $entry)
     {
-        $this->entries[$entry->id()] = $entry;
     }
 
     /**
@@ -38,11 +28,7 @@ class Volatile implements \perf\Caching\Storage
      */
     public function fetch($id)
     {
-        if (!array_key_exists($id, $this->entries)) {
-            return null;
-        }
-
-        return $this->entries[$id];
+        return null;
     }
 
     /**
@@ -53,7 +39,6 @@ class Volatile implements \perf\Caching\Storage
      */
     public function flushById($id)
     {
-        unset($this->entries[$id]);
     }
 
     /**
@@ -63,6 +48,5 @@ class Volatile implements \perf\Caching\Storage
      */
     public function flushAll()
     {
-        $this->entries = array();
     }
 }
