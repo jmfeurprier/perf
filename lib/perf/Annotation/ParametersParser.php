@@ -144,7 +144,7 @@ class ParametersParser
     {
         if (0 !== strpos($this->parametersString, $expectedString)) {
             $message = "Parameters annotation '{$this->parametersString}' "
-                     . "does not match expected string '{$expectString}'.";
+                     . "does not match expected string '{$expectedString}'.";
 
             throw new \RuntimeException($message);
         }
