@@ -121,7 +121,9 @@ class PrimaryKeyExtractor
             }
 
             if ($propertyPrimaryKeyAnnotationCount > 1) {
-                throw new \RuntimeException("More than one primary key annotation found for property '{$propertyName}'.");
+                $message = "More than one primary key annotation found for property '{$propertyName}'.";
+
+                throw new \RuntimeException($message);
             }
 
             $propertyPrimaryKeyAnnotation = reset($propertyPrimaryKeyAnnotations);
