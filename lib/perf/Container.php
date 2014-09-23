@@ -13,7 +13,7 @@ class Container
     /**
      *
      *
-     * @var {string:Closure}
+     * @var {string:\Closure}
      */
     private $closures = array();
 
@@ -28,10 +28,10 @@ class Container
      *
      *
      * @param string $key
-     * @param Closure $closure
+     * @param \Closure $closure
      * @return Container Fluent return.
      */
-    public function prepare($key, Closure $closure)
+    public function prepare($key, \Closure $closure)
     {
         unset($this->instances[$key]);
         $this->closures[$key] = $closure;
