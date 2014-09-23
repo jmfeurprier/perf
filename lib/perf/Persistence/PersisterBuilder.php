@@ -62,7 +62,7 @@ class PersisterBuilder
     public function build()
     {
         if (is_null($this->cacheClient)) {
-            $cacheStorage = new \perf\Caching\Storage\Volatile();
+            $cacheStorage = new \perf\Caching\VolatileStorage();
 
             $this->cacheClient = new \perf\Caching\CacheClient($cacheStorage);
         }
