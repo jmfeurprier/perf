@@ -29,7 +29,7 @@ class QueryFilter
      *
      * @return QueryFilterBuilder
      */
-    public static function getBuilder()
+    public static function createBuilder()
     {
         return new QueryFilterBuilder();
     }
