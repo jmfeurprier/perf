@@ -26,7 +26,7 @@ class NullStorage implements Storage
      * @param string $id Cache item unique identifier (ex: 123).
      * @return null|CacheEntry
      */
-    public function fetch($id)
+    public function tryFetch($id)
     {
         return null;
     }

@@ -110,23 +110,24 @@ class EntityMetadataPool
      *
      *
      * @return void
+     * @throws \RuntimeException
      */
     private function restoreCache()
     {
         $this->entityMetadatas = array();
 
-        $cacheFetchResult = $this->cacheClient->fetch($this->cacheId);
+        $entityMetadatas = $this->cacheClient->tryFetch($this->cacheId);
 
-        if ($cacheFetchResult->hit()) {
-            $entityMetadatas = $cacheFetchResult->data();
+        if (!$entityMetadatas) {
+            return;
+        }
 
-            if (!is_array($entityMetadatas)) {
-                throw new \RuntimeException('Invalid entity metadatas restored from cache.');
-            }
+        if (!is_array($entityMetadatas)) {
+            throw new \RuntimeException('Invalid entity metadatas fetched from cache.');
+        }
 
-            foreach ($entityMetadatas as $entityMetadata) {
-                $this->storeEntityMetadata($entityMetadata);
-            }
+        foreach ($entityMetadatas as $entityMetadata) {
+            $this->storeEntityMetadata($entityMetadata);
         }
     }
 

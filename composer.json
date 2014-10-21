@@ -1,14 +1,15 @@
 {
 	"name": "perf",
 	"require": {
+        "php": ">=5.3"
 	},
 	"require-dev": {
-		"phpunit/phpunit": "4.0.*",
-		"squizlabs/php_codesniffer": "1.5.*",
-		"phpmd/phpmd": "2.0.*",
-		"sebastian/phpcpd": "2.0.*",
-		"phploc/phploc": "2.0.*",
-		"pdepend/pdepend": "2.0.*"
+		"phpunit/phpunit":           "~4.0",
+		"squizlabs/php_codesniffer": "~1.5",
+		"phpmd/phpmd":               "~2.0",
+		"sebastian/phpcpd":          "~2.0",
+		"phploc/phploc":             "~2.0",
+		"pdepend/pdepend":           "~2.0"
 	},
 	"autoload": {
 		"psr-4": {

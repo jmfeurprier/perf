@@ -57,7 +57,7 @@ class FileSystemStorage implements Storage
      * @return null|CacheEntry
      * @throws \RuntimeException
      */
-    public function fetch($id)
+    public function tryFetch($id)
     {
         $cacheFilePath = $this->getCacheFilePath($id);
 

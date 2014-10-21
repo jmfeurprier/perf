@@ -34,7 +34,7 @@ class VolatileStorage implements Storage
      * @param string $id Cache item unique identifier (ex: 123).
      * @return null|CacheEntry
      */
-    public function fetch($id)
+    public function tryFetch($id)
     {
         if (!array_key_exists($id, $this->entries)) {
             return null;

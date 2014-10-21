@@ -27,7 +27,7 @@ interface Storage
      * @return null|CacheEntry
      * @throws \RuntimeException
      */
-    public function fetch($id);
+    public function tryFetch($id);
 
     /**
      *
