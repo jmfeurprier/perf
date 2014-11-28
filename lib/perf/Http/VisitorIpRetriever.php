@@ -21,9 +21,9 @@ class VisitorIpRetriever
     public function retrieve(array $serverValues = null)
     {
         static $keys = array(
+            'REMOTE_ADDR',
             'HTTP_CLIENT_IP',
             'HTTP_X_FORWARDED_FOR',
-            'REMOTE_ADDR',
         );
 
         $serverValues = $this->getServerValues($serverValues);
