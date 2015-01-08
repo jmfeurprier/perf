@@ -61,8 +61,8 @@ class Error
     public function setMessage($message)
     {
         $this->message = is_null($message)
-                        ? null
-                        : (string) $message;
+                       ? null
+                       : (string) $message;
 
         return $this;
     }
@@ -86,8 +86,8 @@ class Error
     public function setFieldName($name)
     {
         $this->fieldName = is_null($name)
-                          ? null
-                          : (string) $name;
+                         ? null
+                         : (string) $name;
 
         return $this;
     }

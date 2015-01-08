@@ -2,9 +2,9 @@
 
 namespace perf\Form\ExecutionResult;
 
-use \perf\Form\ExecutionResult;
-use \perf\Form\Errors;
 use \perf\Form\Error;
+use \perf\Form\ErrorCollection;
+use \perf\Form\ExecutionResult;
 
 /**
  *
@@ -17,9 +17,9 @@ class Invalid implements ExecutionResult
     /**
      *
      *
-     * @var Error[]
+     * @var ErrorCollection
      */
-    private $errors = array();
+    private $errors;
 
     /**
      *
@@ -31,27 +31,14 @@ class Invalid implements ExecutionResult
     /**
      * Constructor.
      *
-     * @param Errors $errors
+     * @param Error[] $errors
      * @param {string:mixed} $values
      * @return void
      */
-    public function __construct(Errors $errors, array $values)
+    public function __construct(array $errors, array $values)
     {
-        foreach ($errors as $error) {
-            $this->addError($error);
-        }
-
+        $this->errors = new ErrorCollection($errors);
         $this->values = $values;
-    }
-
-    /**
-     *
-     * @param Error $error
-     * @return void
-     */
-    private function addError(Error $error)
-    {
-        $this->errors[] = $error;
     }
 
     /**
@@ -77,7 +64,7 @@ class Invalid implements ExecutionResult
     /**
      *
      *
-     * @return Error[]
+     * @return ErrorCollection
      */
     public function getErrors()
     {

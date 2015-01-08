@@ -2,6 +2,7 @@
 
 namespace perf\Form\ExecutionResult;
 
+use \perf\Form\ErrorCollection;
 use \perf\Form\ExecutionResult;
 
 /**
@@ -15,18 +16,26 @@ class Valid implements ExecutionResult
     /**
      *
      *
+     * @var ErrorCollection
+     */
+    private $errors;
+
+    /**
+     *
+     *
      * @var {string:mixed}
      */
     private $values;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param {string:mixed} $values
      * @return void
      */
     public function __construct(array $values)
     {
+        $this->errors = new ErrorCollection();
         $this->values = $values;
     }
 
@@ -53,11 +62,11 @@ class Valid implements ExecutionResult
     /**
      *
      *
-     * @return Form_Error[]
+     * @return ErrorCollection
      */
     public function getErrors()
     {
-        return array();
+        return $this->errors;
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace perf\Form\ExecutionResult;
 
+use \perf\Form\ErrorCollection;
 use \perf\Form\ExecutionResult;
 
 /**
@@ -15,18 +16,26 @@ class NotSubmitted implements ExecutionResult
     /**
      *
      *
+     * @var ErrorCollection
+     */
+    private $errors;
+
+    /**
+     *
+     *
      * @var {string:mixed}
      */
     private $values;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param {string:mixed} $values
      * @return void
      */
     public function __construct(array $values)
     {
+        $this->errors = new ErrorCollection();
         $this->values = $values;
     }
 
@@ -47,17 +56,17 @@ class NotSubmitted implements ExecutionResult
      */
     public function valid()
     {
-        throw new \RuntimeException();
+        return false;
     }
 
     /**
      *
      *
-     * @return Error[]
+     * @return ErrorCollection
      */
     public function getErrors()
     {
-        return array();
+        return $this->errors;
     }
 
     /**
