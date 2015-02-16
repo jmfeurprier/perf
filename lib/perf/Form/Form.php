@@ -48,7 +48,7 @@ abstract class Form
      */
     public function execute(array $submittedValues)
     {
-        $this->clearErrors();
+        $this->errors = array();
 
         if (!$this->submittable($submittedValues)) {
             return new ExecutionResult\NotSubmitted($this->getValues());
@@ -67,16 +67,6 @@ abstract class Form
         $this->onValid($values);
 
         return new ExecutionResult\Valid($values);
-    }
-
-    /**
-     *
-     *
-     * @return void
-     */
-    private function clearErrors()
-    {
-        $this->errors = array();
     }
 
     /**

@@ -2,7 +2,6 @@
 
 namespace perf\Form\ExecutionResult;
 
-use \perf\Form\ErrorCollection;
 use \perf\Form\ExecutionResult;
 
 /**
@@ -35,7 +34,7 @@ class Valid implements ExecutionResult
      */
     public function __construct(array $values)
     {
-        $this->errors = new ErrorCollection();
+        $this->errors = new ErrorCollection(array());
         $this->values = $values;
     }
 

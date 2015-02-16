@@ -36,10 +36,15 @@ class Error
      *
      * @param string $id
      * @return void
+     * @throws \InvalidArgumentException
      */
     public function __construct($id)
     {
-        $this->id = (string) $id;
+        if (!is_string($id) || ('' === $id)) {
+            throw new \InvalidArgumentException();
+        }
+
+        $this->id = $id;
     }
 
     /**
@@ -57,12 +62,15 @@ class Error
      *
      * @param null|string $message
      * @return Error Fluent return.
+     * @throws \InvalidArgumentException
      */
     public function setMessage($message)
     {
-        $this->message = is_null($message)
-                       ? null
-                       : (string) $message;
+        if ((null !== $message) && !is_string($message)) {
+            throw new \InvalidArgumentException();
+        }
+
+        $this->message = $message;
 
         return $this;
     }
@@ -82,12 +90,15 @@ class Error
      *
      * @param null|string $name
      * @return Error Fluent return.
+     * @throws \InvalidArgumentException
      */
     public function setFieldName($name)
     {
-        $this->fieldName = is_null($name)
-                         ? null
-                         : (string) $name;
+        if ((null !== $name) && !is_string($name)) {
+            throw new \InvalidArgumentException();
+        }
+
+        $this->fieldName = $name;
 
         return $this;
     }

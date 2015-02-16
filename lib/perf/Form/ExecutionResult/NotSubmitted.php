@@ -35,7 +35,7 @@ class NotSubmitted implements ExecutionResult
      */
     public function __construct(array $values)
     {
-        $this->errors = new ErrorCollection();
+        $this->errors = new ErrorCollection(array());
         $this->values = $values;
     }
 
