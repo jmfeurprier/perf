@@ -2,6 +2,7 @@
 
 namespace perf\Form\ExecutionResult;
 
+use \perf\Form\ErrorCollection;
 use \perf\Form\ExecutionResult;
 
 /**
