@@ -8,7 +8,7 @@ use \perf\String\IpV4;
  *
  *
  */
-class VisitorIpRetriever
+class VisitorIpV4Retriever
 {
 
     /**
