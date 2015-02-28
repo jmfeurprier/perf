@@ -60,7 +60,7 @@ class Container
     public function get($key)
     {
         if ($this->instances->has($key)) {
-            $this->instances->get($key)
+            return $this->instances->get($key);
         }
 
         if ($this->closures->has($key)) {
