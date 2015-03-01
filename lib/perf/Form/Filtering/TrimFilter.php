@@ -34,11 +34,15 @@ class TrimFilter implements Filter
     /**
      *
      *
-     * @param mixed $value
-     * @return mixed
+     * @param null|string[] $trimmableCharacters
+     * @return void
      */
-    public function __construct(array $trimmableCharacters = self::$defaultTrimmableCharacters)
+    public function __construct(array $trimmableCharacters = null)
     {
+        if (null === $trimmableCharacters) {
+            $trimmableCharacters = self::$defaultTrimmableCharacters;
+        }
+
         $this->trimmableCharacters = join($trimmableCharacters);
     }
 
@@ -46,7 +50,7 @@ class TrimFilter implements Filter
      *
      *
      * @param mixed $value
-     * @return mixed
+     * @return string
      */
     public function apply($value)
     {

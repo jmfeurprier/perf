@@ -150,6 +150,10 @@ class QueryFilterBuilder
      */
     public function build()
     {
-        return $this->queryFilter;
+        if ($this->queryFilter) {
+            return $this->queryFilter;
+        }
+
+        throw new \RuntimeException('No query filter to build.');
     }
 }
