@@ -6,6 +6,7 @@
 		"ext-mbstring" : "*"
 	},
 	"require-dev": {
+		"ext-xdebug"                : "~2.1",
 		"pdepend/pdepend"           : "~2.0",
 		"phing/phing"               : "~2.0",
 		"phpunit/phpunit"           : "~4.0",
