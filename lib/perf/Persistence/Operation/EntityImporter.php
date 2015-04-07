@@ -91,9 +91,15 @@ class EntityImporter
         }
 
         switch ($column->getType()) {
+            case 'int':
             case 'integer':
                 return (int) $value;
 
+            case 'float':
+            case 'double':
+                return (float) $value;
+
+            case 'bool':
             case 'boolean':
                 return (bool) $value;
         }
