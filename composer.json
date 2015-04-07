@@ -1,7 +1,9 @@
 {
-	"name"    : "perf",
-	"type"    : "library",
-	"require" : {
+	"name"        : "perf/perf",
+	"type"        : "library",
+	"license"     : "MIT",
+	"description" : "perf, the PHP Extensible and Robust Framework",
+	"require"     : {
 		"php"          : ">=5.3.3",
 		"ext-mbstring" : "*"
 	},
@@ -10,7 +12,7 @@
 		"pdepend/pdepend"           : "~2.0",
 		"phing/phing"               : "~2.0",
 		"phpunit/phpunit"           : "~4.0",
-		"phpmd/phpmd"               : "~2.1.0",
+		"phpmd/phpmd"               : "~2.0",
 		"sebastian/phpcpd"          : "~2.0",
 		"squizlabs/php_codesniffer" : "~2.0"
 	},
