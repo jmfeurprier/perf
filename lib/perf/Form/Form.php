@@ -46,7 +46,7 @@ abstract class Form
      * @param array $submittedValues
      * @return ExecutionResult
      */
-    public function execute(array $submittedValues)
+    public function execute(array $submittedValues = array())
     {
         $this->errors = array();
 
@@ -83,11 +83,14 @@ abstract class Form
 
     /**
      *
+     * Default implementation, to be overridden.
      *
      * @param {string:mixed} $values
      * @return void
      */
-    abstract protected function validate(array $values);
+    protected function validate(array $values)
+    {
+    }
 
     /**
      *
