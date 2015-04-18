@@ -76,7 +76,7 @@ class Radio extends Field
      *
      *
      * @param string $value
-     * @return Radio Fluent return.
+     * @return Field Fluent return.
      */
     public function setSubmittedValue($value)
     {
