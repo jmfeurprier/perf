@@ -5,7 +5,7 @@ namespace perf\String;
 /**
  *
  */
-class CharTest extends \PHPUnit_Framework_TestCase
+class Md5HashTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -13,9 +13,7 @@ class CharTest extends \PHPUnit_Framework_TestCase
      */
     public function testWithValidString()
     {
-        $string = 'a';
-
-        $perfString = new Char($string);
+        $perfString = new Md5Hash('0123456789abcdef0123456789abcdef');
     }
 
     /**
@@ -23,9 +21,9 @@ class CharTest extends \PHPUnit_Framework_TestCase
      */
     public function testWithValidPerfString()
     {
-        $string = new Char('a');
+        $string = new Md5Hash('0123456789abcdef0123456789abcdef');
 
-        $perfString = new Char($string);
+        $perfString = new Md5Hash($string);
     }
 
     /**
@@ -35,6 +33,8 @@ class CharTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array(''),
+            array('0123456789abcdef0123456789abcdef0'),
+            array('0123456789abcdef0123456789abcde'),
             array('ab'),
             array('abc'),
             array(0),
@@ -54,6 +54,6 @@ class CharTest extends \PHPUnit_Framework_TestCase
      */
     public function testWithInvalidStrings($string)
     {
-        new Char($string);
+        new Md5Hash($string);
     }
 }

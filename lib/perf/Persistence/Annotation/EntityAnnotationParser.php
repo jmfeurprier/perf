@@ -25,14 +25,14 @@ class EntityAnnotationParser
     /**
      *
      *
-     * @var StorageAnnotationParser 
+     * @var StorageAnnotationParser
      */
     private $storageAnnotationParser;
 
     /**
      *
      *
-     * @var PropertiesAnnotationsExtractor 
+     * @var PropertiesAnnotationsExtractor
      */
     private $propertiesAnnotationsExtractor;
 
