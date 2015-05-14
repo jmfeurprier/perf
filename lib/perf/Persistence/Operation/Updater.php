@@ -10,7 +10,6 @@ use \perf\Db\Connection;
 /**
  *
  *
- * @package perf
  */
 class Updater extends Operator
 {

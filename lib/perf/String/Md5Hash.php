@@ -5,7 +5,6 @@ namespace perf\String;
 /**
  * This class allows to handle and validate strings representing a MD5 hash.
  *
- * @package perf
  */
 class Md5Hash extends String
 {

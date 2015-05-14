@@ -5,7 +5,6 @@ namespace perf\String;
 /**
  * This class allows to handle and validate strings representing a hexadecimal number.
  *
- * @package perf
  */
 class HexadecimalNumber extends String
 {

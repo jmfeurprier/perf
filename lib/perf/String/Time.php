@@ -5,7 +5,6 @@ namespace perf\String;
 /**
  * This class allows to handle and validate strings representing a standardized time (HH:MM:SS).
  *
- * @package perf
  */
 class Time extends String
 {

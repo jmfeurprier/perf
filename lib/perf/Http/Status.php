@@ -6,7 +6,6 @@ namespace perf\Http;
  * This class lists all available HTTP/1.0 and HTTP/1.1 header status codes, and allows to send complete
  *   header status strings.
  *
- * @package perf
  */
 class Status
 {

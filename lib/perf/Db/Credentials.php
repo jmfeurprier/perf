@@ -5,7 +5,6 @@ namespace perf\Db;
 /**
  * This class allows to encapsulate database connection credentials.
  *
- * @package perf
  */
 class Credentials
 {

@@ -7,7 +7,6 @@ use \perf\Persistence\Annotation\EntityAnnotationParser;
 /**
  *
  *
- * @package perf
  */
 class EntityMetadataPool
 {

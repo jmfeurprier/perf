@@ -10,7 +10,6 @@ use \perf\Persistence\NaturalPrimaryKey;
 /**
  *
  *
- * @package perf
  */
 class PrimaryKeyExtractor
 {

@@ -7,7 +7,6 @@ use \perf\Persistence\EntityMetadata;
 /**
  *
  *
- * @package perf
  */
 class EntityExporter
 {

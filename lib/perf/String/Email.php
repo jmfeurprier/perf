@@ -5,7 +5,6 @@ namespace perf\String;
 /**
  * This class allows to handle and validate strings representing an e-mail address.
  *
- * @package perf
  */
 class Email extends String
 {

@@ -5,7 +5,6 @@ namespace perf\String;
 /**
  * This class allows to handle and validate strings representing standardized date and time (YYYY-MM-DD HH:MM:SS).
  *
- * @package perf
  */
 class DateTime extends String
 {

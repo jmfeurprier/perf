@@ -6,7 +6,6 @@ namespace perf\Db;
  * This class acts as a registry for database connections, allowing to interact with multiple databases
  *   within the same application.
  *
- * @package perf
  */
 class ConnectionPool
 {

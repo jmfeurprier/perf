@@ -10,7 +10,6 @@ use \perf\Persistence\EntityIterator;
 /**
  *
  *
- * @package perf
  */
 class Selecter extends Operator
 {

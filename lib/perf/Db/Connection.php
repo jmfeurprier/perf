@@ -7,7 +7,6 @@ namespace perf\Db;
  *
  * @see http://www.php.net/pdo
  *
- * @package perf
  */
 class Connection
 {

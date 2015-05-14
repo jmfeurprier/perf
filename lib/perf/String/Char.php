@@ -5,7 +5,6 @@ namespace perf\String;
 /**
  * This class allows to handle and validate strings representing a single character ("char").
  *
- * @package perf
  */
 class Char extends String
 {

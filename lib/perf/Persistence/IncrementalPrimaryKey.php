@@ -5,7 +5,6 @@ namespace perf\Persistence;
 /**
  *
  *
- * @package perf
  */
 class IncrementalPrimaryKey implements PrimaryKey
 {

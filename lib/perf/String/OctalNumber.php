@@ -5,7 +5,6 @@ namespace perf\String;
 /**
  * This class allows to handle and validate strings representing an octal number.
  *
- * @package perf
  */
 class OctalNumber extends String
 {

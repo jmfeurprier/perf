@@ -5,7 +5,6 @@ namespace perf\Db;
 /**
  *
  *
- * @package perf
  * @internal
  */
 class QueryResult extends \IteratorIterator

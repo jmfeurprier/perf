@@ -7,7 +7,6 @@ use \perf\Persistence\Storage;
 /**
  *
  *
- * @package perf
  */
 class StorageAnnotationParser
 {

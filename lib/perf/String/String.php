@@ -6,7 +6,6 @@ namespace perf\String;
  * This abstract class and its children allow to handle and validate strings with a pre-defined format
  *   (like e-mail address, hexadecimal number, etc).
  *
- * @package perf
  */
 abstract class String
 {

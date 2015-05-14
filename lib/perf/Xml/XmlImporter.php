@@ -5,7 +5,6 @@ namespace perf\Xml;
 /**
  *
  *
- * @package perf
  */
 class XmlImporter
 {

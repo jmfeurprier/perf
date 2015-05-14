@@ -6,7 +6,6 @@ namespace perf\Password;
  * This class allows to generate random passwords based on specific constraints:
  *   character dictionary, minimum and maximum lengths.
  *
- * @package perf
  */
 class Generator
 {

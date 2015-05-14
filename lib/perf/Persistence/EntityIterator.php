@@ -8,7 +8,6 @@ use \perf\Persistence\Operation\EntityImporter;
 /**
  *
  *
- * @package perf
  * @internal
  */
 class EntityIterator implements \Iterator

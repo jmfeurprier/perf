@@ -5,7 +5,6 @@ namespace perf\Persistence\Annotation;
 /**
  *
  *
- * @package perf
  */
 class PropertiesAnnotationsExtractor
 {

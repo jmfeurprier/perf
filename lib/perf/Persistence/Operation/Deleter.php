@@ -5,7 +5,6 @@ namespace perf\Persistence\Operation;
 /**
  *
  *
- * @package perf
  */
 class Deleter extends Operator
 {

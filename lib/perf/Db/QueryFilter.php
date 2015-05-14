@@ -5,7 +5,6 @@ namespace perf\Db;
 /**
  * This class allows for SQL "WHERE" and "HAVING" clauses to be built safely and automatically.
  *
- * @package perf
  */
 class QueryFilter
 {

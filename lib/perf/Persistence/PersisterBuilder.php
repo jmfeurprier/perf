@@ -9,7 +9,6 @@ use \perf\Db\QuerySorting;
 /**
  *
  *
- * @package perf
  */
 class PersisterBuilder
 {

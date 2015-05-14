@@ -10,7 +10,6 @@ use \perf\Persistence\PrimaryKey;
 /**
  *
  *
- * @package perf
  */
 class Inserter extends Operator
 {

@@ -5,7 +5,6 @@ namespace perf\Db;
 /**
  * This class allows for SQL "ORDER BY" clause to be built automatically.
  *
- * @package perf
  */
 class QuerySorting
 {

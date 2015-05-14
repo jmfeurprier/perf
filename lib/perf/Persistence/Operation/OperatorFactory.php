@@ -8,7 +8,6 @@ use \perf\Db\ConnectionPool;
 /**
  *
  *
- * @package perf
  */
 class OperatorFactory
 {

@@ -10,7 +10,6 @@ use \perf\Persistence\EntityMetadata;
 /**
  *
  *
- * @package perf
  */
 class EntityAnnotationParser
 {

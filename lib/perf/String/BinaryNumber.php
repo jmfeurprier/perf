@@ -5,7 +5,6 @@ namespace perf\String;
 /**
  * This class allows to handle and validate strings representing a binary number.
  *
- * @package perf
  */
 class BinaryNumber extends String
 {

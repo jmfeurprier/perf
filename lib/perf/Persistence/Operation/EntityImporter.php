@@ -8,7 +8,6 @@ use \perf\Persistence\Column;
 /**
  *
  *
- * @package perf
  */
 class EntityImporter
 {

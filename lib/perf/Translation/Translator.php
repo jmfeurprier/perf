@@ -5,7 +5,6 @@ namespace perf\Translation;
 /**
  *
  *
- * @package perf
  */
 class Translator
 {

@@ -5,7 +5,6 @@ namespace perf\Annotation;
 /**
  *
  *
- * @package perf
  */
 class ParametersParser
 {

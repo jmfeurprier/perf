@@ -9,7 +9,6 @@ use \perf\Db\Connection;
 /**
  *
  *
- * @package perf
  */
 abstract class Operator
 {

@@ -5,7 +5,6 @@ namespace perf\String;
 /**
  * This class allows to handle and validate strings representing a SHA1 hash.
  *
- * @package perf
  */
 class Sha1Hash extends String
 {

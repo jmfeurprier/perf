@@ -5,7 +5,6 @@ namespace perf\Template;
 /**
  *
  *
- * @package perf
  */
 class Token
 {

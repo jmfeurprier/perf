@@ -5,7 +5,6 @@ namespace perf\Http;
 /**
  * This class allows to redirect visitors to other web sites / pages, using HTTP header and HTTP status codes.
  *
- * @package perf
  */
 class Redirector
 {
