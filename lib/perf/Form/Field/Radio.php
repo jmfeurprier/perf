@@ -60,10 +60,38 @@ class Radio extends Field
     /**
      *
      *
+     * @param mixed $value
+     * @return Field Fluent return.
+     */
+    public function setInitialValue($value)
+    {
+        if (!$this->isSubmitted()) {
+            $this->checkItemByValue($value);
+        }
+
+        return parent::setInitialValue($value);
+    }
+
+    /**
+     *
+     *
      * @param string $value
-     * @return Radio Fluent return.
+     * @return Field Fluent return.
      */
     public function setSubmittedValue($value)
+    {
+        $this->checkItemByValue($value);
+
+        return parent::setSubmittedValue($value);
+    }
+
+    /**
+     *
+     *
+     * @param string $value
+     * @return void
+     */
+    private function checkItemByValue($value)
     {
         $checked = false;
 
@@ -76,10 +104,5 @@ class Radio extends Field
                 $item->uncheck();
             }
         }
-
-        $this->submittedValue = (string) $value;
-        $this->submitted      = true;
-
-        return parent::setSubmittedValue($value);
     }
 }

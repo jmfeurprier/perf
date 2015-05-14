@@ -80,7 +80,7 @@ class EntityMetadataPool
     public function fetch($entityClass)
     {
         if (!is_string($entityClass)) {
-            throw new \InvalidArgumentException();
+            throw new \InvalidArgumentException('Invalid entity class type (expected string).');
         }
 
         if (!$this->cacheRestored) {
@@ -93,7 +93,9 @@ class EntityMetadataPool
             try {
                 $entityMetadata = $this->getEntityAnnotationParser()->parse($entityClass);
             } catch (\Exception $e) {
-                throw new \RuntimeException("Failed to parse entity class '{$entityClass}' annotations. << {$e->getMessage()}", 0, $e);
+                $message = "Failed to parse entity class '{$entityClass}' annotations. << {$e->getMessage()}";
+
+                throw new \RuntimeException($message, 0, $e);
             }
 
             $this->storeEntityMetadata($entityMetadata);
@@ -108,23 +110,24 @@ class EntityMetadataPool
      *
      *
      * @return void
+     * @throws \RuntimeException
      */
     private function restoreCache()
     {
         $this->entityMetadatas = array();
 
-        $cacheFetchResult = $this->cacheClient->fetch($this->cacheId);
+        $entityMetadatas = $this->cacheClient->tryFetch($this->cacheId);
 
-        if ($cacheFetchResult->hit()) {
-            $entityMetadatas = $cacheFetchResult->data();
+        if (!$entityMetadatas) {
+            return;
+        }
 
-            if (!is_array($entityMetadatas)) {
-                throw new \RuntimeException();
-            }
+        if (!is_array($entityMetadatas)) {
+            throw new \RuntimeException('Invalid entity metadatas fetched from cache.');
+        }
 
-            foreach ($entityMetadatas as $entityMetadata) {
-                $this->storeEntityMetadata($entityMetadata);
-            }
+        foreach ($entityMetadatas as $entityMetadata) {
+            $this->storeEntityMetadata($entityMetadata);
         }
     }
 

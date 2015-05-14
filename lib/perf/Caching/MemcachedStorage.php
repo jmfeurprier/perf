@@ -1,14 +1,12 @@
 <?php
 
-namespace perf\Caching\Storage;
-
-use \perf\Caching\CacheEntry;
+namespace perf\Caching;
 
 /**
  *
  *
  */
-class Cache_MemcachedClient implements \perf\Caching\Storage
+class MemcachedStorage implements Storage
 {
 
     /**
@@ -88,7 +86,7 @@ class Cache_MemcachedClient implements \perf\Caching\Storage
      * @return null|CacheEntry
      * @throws \RuntimeException
      */
-    public function fetch($id)
+    public function tryFetch($id)
     {
         $result = $this->getConnection()->get($id);
 

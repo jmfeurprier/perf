@@ -98,11 +98,11 @@ class AnnotationParser
     private function init($annotationString)
     {
         if (!is_string($annotationString)) {
-            throw new \InvalidArgumentException();
+            throw new \InvalidArgumentException('Annotation type is not valid (expected string).');
         }
 
         if (0 !== strpos($annotationString, '@')) {
-            throw new \InvalidArgumentException();
+            throw new \InvalidArgumentException("Annotation string does not start with '@'.");
         }
 
         $this->annotationString = $annotationString;

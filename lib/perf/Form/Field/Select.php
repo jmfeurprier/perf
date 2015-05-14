@@ -60,10 +60,38 @@ class Select extends Field
     /**
      *
      *
+     * @param mixed $value
+     * @return Field Fluent return.
+     */
+    public function setInitialValue($value)
+    {
+        if (!$this->isSubmitted()) {
+            $this->selectOptionByValue($value);
+        }
+
+        return parent::setInitialValue($value);
+    }
+
+    /**
+     *
+     *
      * @param string $value
-     * @return Select Fluent return.
+     * @return Field Fluent return.
      */
     public function setSubmittedValue($value)
+    {
+        $this->selectOptionByValue($value);
+
+        return parent::setSubmittedValue($value);
+    }
+
+    /**
+     *
+     *
+     * @param string $value
+     * @return void
+     */
+    private function selectOptionByValue($value)
     {
         $selected = false;
 
@@ -76,7 +104,5 @@ class Select extends Field
                 $option->deselect();
             }
         }
-
-        return parent::setSubmittedValue($value);
     }
 }

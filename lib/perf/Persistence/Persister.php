@@ -26,7 +26,7 @@ class Persister
      *
      * @return PersisterBuilder
      */
-    public static function getBuilder()
+    public static function createBuilder()
     {
         return new PersisterBuilder();
     }

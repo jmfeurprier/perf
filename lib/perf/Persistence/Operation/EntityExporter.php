@@ -78,7 +78,7 @@ class EntityExporter
      *
      *
      * @param string $propertyName
-     * @return mixed
+     * @return null|string
      */
     private function getPropertyValue($propertyName)
     {
@@ -90,6 +90,14 @@ class EntityExporter
             $reflectionProperty->setAccessible(true);
             $value = $reflectionProperty->getValue($this->entity);
             $reflectionProperty->setAccessible(false);
+        }
+
+        if (!is_null($value)) {
+            if (is_bool($value)) {
+                $value = (int) $value;
+            }
+
+            $value = (string) $value;
         }
 
         return $value;

@@ -23,9 +23,9 @@ abstract class Form
     /**
      *
      *
-     * @var Errors
+     * @var Error[]
      */
-    private $errors;
+    private $errors = array();
 
     /**
      *
@@ -46,9 +46,9 @@ abstract class Form
      * @param array $submittedValues
      * @return ExecutionResult
      */
-    public function execute(array $submittedValues)
+    public function execute(array $submittedValues = array())
     {
-        $this->clearErrors();
+        $this->errors = array();
 
         if (!$this->submittable($submittedValues)) {
             return new ExecutionResult\NotSubmitted($this->getValues());
@@ -58,12 +58,10 @@ abstract class Form
 
         $this->validate($values);
 
-        $errors = $this->getErrors();
-
-        if (count($errors) > 0) {
+        if (count($this->errors) > 0) {
             $this->onInvalid($values);
 
-            return new ExecutionResult\Invalid($errors, $values);
+            return new ExecutionResult\Invalid($this->errors, $values);
         }
 
         $this->onValid($values);
@@ -73,21 +71,9 @@ abstract class Form
 
     /**
      *
-     *
-     * @return Form Fluent return.
-     */
-    private function clearErrors()
-    {
-        $this->errors = new Errors();
-
-        return $this;
-    }
-
-    /**
-     *
      * Default implementation, to be overridden.
      *
-     * @param unknown_type $submittedValues
+     * @param {string:mixed} $submittedValues
      * @return bool
      */
     protected function submittable(array $submittedValues)
@@ -97,11 +83,14 @@ abstract class Form
 
     /**
      *
+     * Default implementation, to be overridden.
      *
-     * @param unknown_type $values
+     * @param {string:mixed} $values
      * @return void
      */
-    abstract protected function validate(array $values);
+    protected function validate(array $values)
+    {
+    }
 
     /**
      *
@@ -127,7 +116,7 @@ abstract class Form
     {
         $error = new Error($id);
 
-        $this->getErrors()->add($error);
+        $this->errors[] = $error;
 
         return $error;
     }
@@ -139,14 +128,14 @@ abstract class Form
      */
     protected function getErrorCount()
     {
-        return count($this->getErrors());
+        return count($this->errors);
     }
 
     /**
      *
      * Default implementation.
      *
-     * @param unknown_type $values
+     * @param {string:mixed} $values
      * @return void
      */
     protected function onValid(array $values)
@@ -157,25 +146,11 @@ abstract class Form
      *
      * Default implementation.
      *
-     * @param unknown_type $values
+     * @param {string:mixed} $values
      * @return void
      */
     protected function onInvalid(array $values)
     {
-    }
-
-    /**
-     *
-     *
-     * @return Errors
-     */
-    private function getErrors()
-    {
-        if (!isset($this->errors)) {
-            $this->errors = new Errors();
-        }
-
-        return $this->errors;
     }
 
     /**

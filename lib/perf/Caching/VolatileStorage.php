@@ -1,15 +1,13 @@
 <?php
 
-namespace perf\Caching\Storage;
-
-use \perf\Caching\CacheEntry;
+namespace perf\Caching;
 
 /**
  *
  *
  * @package perf
  */
-class Volatile implements \perf\Caching\Storage
+class VolatileStorage implements Storage
 {
 
     /**
@@ -36,7 +34,7 @@ class Volatile implements \perf\Caching\Storage
      * @param string $id Cache item unique identifier (ex: 123).
      * @return null|CacheEntry
      */
-    public function fetch($id)
+    public function tryFetch($id)
     {
         if (!array_key_exists($id, $this->entries)) {
             return null;

@@ -13,28 +13,39 @@ class Container
     /**
      *
      *
-     * @var {string:Closure}
+     * @var KeyValueCollection
      */
-    private $closures = array();
+    private $closures;
 
     /**
      *
      *
-     * @var {string:object}
+     * @var KeyValueCollection
      */
-    private $instances = array();
+    private $instances;
+
+    /**
+     * Constructor.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->closures  = new KeyValueCollection();
+        $this->instances = new KeyValueCollection();
+    }
 
     /**
      *
      *
      * @param string $key
-     * @param Closure $closure
+     * @param \Closure $closure
      * @return Container Fluent return.
      */
-    public function prepare($key, Closure $closure)
+    public function prepare($key, \Closure $closure)
     {
-        unset($this->instances[$key]);
-        $this->closures[$key] = $closure;
+        $this->instances->remove($key);
+        $this->closures->set($key, $closure);
 
         return $this;
     }
@@ -48,16 +59,16 @@ class Container
      */
     public function get($key)
     {
-        if (array_key_exists($key, $this->instances)) {
-            return $this->instances[$key];
+        if ($this->instances->has($key)) {
+            return $this->instances->get($key);
         }
 
-        if (array_key_exists($key, $this->closures)) {
-            $closure = $this->closures[$key];
+        if ($this->closures->has($key)) {
+            $closure = $this->closures->get($key);
 
             $this->set($key, $closure());
 
-            return $this->instances[$key];
+            return $this->instances->get($key);
         }
 
         throw new \DomainException("Undefined key '{$key}'.");
@@ -75,11 +86,12 @@ class Container
     {
         if (!is_object($instance)) {
             $message = "Invalid argument for key '{$key}': provided instance is not an object.";
+
             throw new \InvalidArgumentException($message);
         }
 
-        unset($this->closures[$key]);
-        $this->instances[$key] = $instance;
+        $this->closures->remove($key);
+        $this->instances->set($key, $instance);
 
         return $this;
     }

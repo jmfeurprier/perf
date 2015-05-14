@@ -3,6 +3,7 @@
 namespace perf\Persistence\Operation;
 
 use \perf\Persistence\EntityMetadata;
+use \perf\Persistence\Column;
 
 /**
  *
@@ -50,6 +51,8 @@ class EntityImporter
             if (array_key_exists($columnName, $row)) {
                 $value = $row[$columnName];
 
+                $value = $this->setValueType($value, $column);
+
                 $this->setPropertyValue($propertyName, $value);
             }
         }
@@ -72,6 +75,36 @@ class EntityImporter
         }
 
         $this->reflectionClass = $cache[$entityClass];
+    }
+
+    /**
+     *
+     *
+     * @param null|string $value
+     * @param Column $column
+     * @return mixed
+     */
+    private function setValueType($value, Column $column)
+    {
+        if (is_null($value)) {
+            return null;
+        }
+
+        switch ($column->getType()) {
+            case 'int':
+            case 'integer':
+                return (int) $value;
+
+            case 'float':
+            case 'double':
+                return (float) $value;
+
+            case 'bool':
+            case 'boolean':
+                return (bool) $value;
+        }
+
+        return $value;
     }
 
     /**

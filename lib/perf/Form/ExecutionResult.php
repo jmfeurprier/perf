@@ -27,7 +27,7 @@ interface ExecutionResult
     /**
      *
      *
-     * @return Error[]
+     * @return ErrorCollection
      */
     public function getErrors();
 

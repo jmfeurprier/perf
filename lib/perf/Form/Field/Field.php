@@ -2,6 +2,8 @@
 
 namespace perf\Form\Field;
 
+use perf\Form\Filtering\Filter;
+
 /**
  *
  *
@@ -39,6 +41,13 @@ abstract class Field
     private $submitted = false;
 
     /**
+     *
+     *
+     * @var Filter[]
+     */
+    private $filters = array();
+
+    /**
      * Constructor.
      * To be called by subclasses.
      *
@@ -71,8 +80,25 @@ abstract class Field
      */
     public function setSubmittedValue($value)
     {
+        foreach ($this->filters as $filter) {
+            $value = $filter->apply($value);
+        }
+
         $this->submittedValue = $value;
         $this->submitted      = true;
+
+        return $this;
+    }
+
+    /**
+     *
+     *
+     * @param Filter $filter
+     * @return Field Fluent return.
+     */
+    public function addFilter(Filter $filter)
+    {
+        $this->filters[] = $filter;
 
         return $this;
     }
@@ -112,5 +138,15 @@ abstract class Field
         $this->submitted      = false;
 
         return $this;
+    }
+
+    /**
+     *
+     *
+     * @return bool
+     */
+    protected function isSubmitted()
+    {
+        return $this->submitted;
     }
 }

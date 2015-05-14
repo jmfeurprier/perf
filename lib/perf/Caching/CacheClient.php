@@ -18,13 +18,6 @@ class CacheClient
     private $storage;
 
     /**
-     * If true, caching is activated.
-     *
-     * @var bool
-     */
-    private $active = true;
-
-    /**
      *
      *
      * @var int
@@ -41,39 +34,6 @@ class CacheClient
     {
         $this->storage      = $storage;
         $this->nowTimestamp = time();
-    }
-
-    /**
-     * Activates / deactivates caching.
-     *
-     * @param bool $active If true, caching will be activated.
-     * @return CacheClient Fluent return.
-     */
-    public function activate($active = true)
-    {
-        $this->active = (bool) $active;
-
-        return $this;
-    }
-
-    /**
-     * Deactivates caching.
-     *
-     * @return CacheClient Fluent return.
-     */
-    public function deactivate()
-    {
-        return $this->activate(false);
-    }
-
-    /**
-     * Allows to know whether caching is active or not.
-     *
-     * @return bool If true, caching is active.
-     */
-    public function active()
-    {
-        return $this->active;
     }
 
     /**
@@ -94,18 +54,14 @@ class CacheClient
      *   and provided content.
      *
      * @param mixed $id Cache item unique identifier (ex: 123).
-     * @param string $data Content to be added to cache.
+     * @param mixed $data Content to be added to cache.
      * @param null|int $maxLifetimeSeconds (Optional) duration in seconds after which cache file will be
      *      considered expired.
      * @return CacheClient Fluent return.
-     * @throws \Exception
+     * @throws \RuntimeException
      */
     public function store($id, $data, $maxLifetimeSeconds = null)
     {
-        if (!$this->active) {
-            return $this;
-        }
-
         $creationTimestamp = time();
 
         if (is_null($maxLifetimeSeconds)) {
@@ -125,38 +81,32 @@ class CacheClient
      * Attempts to retrieve data from cache.
      *
      * @param mixed $id Cache entry unique identifier (ex: "123").
-     * @param null|int $maxLifetimeSeconds Duraton in seconds. If provided, will bypass expiration timestamp
+     * @param null|int $maxLifetimeSeconds Duration in seconds. If provided, will bypass expiration timestamp
      *      in cache file, using creation timestamp + provided duration to check whether cached content has
      *      expired or not.
-     * @return FetchResult
+     * @return null|mixed
      */
-    public function fetch($id, $maxLifetimeSeconds = null)
+    public function tryFetch($id, $maxLifetimeSeconds = null)
     {
-        if (!$this->active) {
-            return new FetchMiss();
-        }
-
-        $entry = $this->storage->fetch($id);
+        $entry = $this->storage->tryFetch($id);
 
         if (is_null($entry)) {
-            return new FetchMiss();
+            return null;
         }
 
         if (!is_null($maxLifetimeSeconds)) {
             if (($this->nowTimestamp - $entry->creationTimestamp()) > $maxLifetimeSeconds) {
-                return new FetchMiss();
+                return null;
             }
         }
 
         if (!is_null($entry->expirationTimestamp())) {
             if ($this->nowTimestamp > $entry->expirationTimestamp()) {
-                return new FetchMiss();
+                return null;
             }
         }
 
-        $data = $entry->data();
-
-        return new FetchHit($entry->data());
+        return $entry->data();
     }
 
     /**

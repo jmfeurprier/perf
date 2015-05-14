@@ -22,7 +22,7 @@ class CacheEntry
      *
      * @var string
      */
-    private $packedData;
+    private $data;
 
     /**
      *

@@ -7,39 +7,38 @@ namespace perf\Form;
  *
  * @package perf
  */
-class Errors implements \IteratorAggregate, \Countable
+class ErrorCollection implements \IteratorAggregate, \Countable
 {
 
     /**
+     * Wrapped errors, indexed by Id.
      *
-     *
-     * @var Error[]
+     * @var {string Error Id:Error}
      */
     private $errors = array();
 
     /**
+     * Constructor.
      *
-     *
-     * @return Errors Fluent return.
+     * @param Error[] $errors
+     * @return void
      */
-    public function clear()
+    public function __construct(array $errors = array())
     {
-        $this->errors = array();
-
-        return $this;
+        foreach ($errors as $error) {
+            $this->add($error);
+        }
     }
 
     /**
      *
      *
      * @param Error $error
-     * @return Errors Fluent return.
+     * @return void
      */
-    public function add(Error $error)
+    private function add(Error $error)
     {
         $this->errors[$error->getId()] = $error;
-
-        return $this;
     }
 
     /**
@@ -47,7 +46,7 @@ class Errors implements \IteratorAggregate, \Countable
      *
      * @return Error[]
      */
-    public function get()
+    public function toArray()
     {
         return array_values($this->errors);
     }
@@ -67,10 +66,15 @@ class Errors implements \IteratorAggregate, \Countable
      *
      * @param string $id
      * @return bool
+     * @throws \InvalidArgumentException
      */
     public function has($id)
     {
-        return array_key_exists((string) $id, $this->errors);
+        if (!is_string($id)) {
+            throw new \InvalidArgumentException();
+        }
+
+        return array_key_exists($id, $this->errors);
     }
 
     /**
