@@ -1,13 +1,13 @@
 <?php
 
-namespace perf\Password;
+namespace perf\Text;
 
 /**
  * This class allows to generate random passwords based on specific constraints:
  *   character dictionary, minimum and maximum lengths.
  *
  */
-class Generator
+class PasswordGenerator
 {
 
     /**
