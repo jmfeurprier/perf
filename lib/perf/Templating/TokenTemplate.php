@@ -1,12 +1,12 @@
 <?php
 
-namespace perf\Template;
+namespace perf\Templating;
 
 /**
  *
  *
  */
-class Token
+class TokenTemplate
 {
 
     /**
