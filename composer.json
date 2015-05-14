@@ -2,10 +2,21 @@
 	"name"        : "perf/perf",
 	"type"        : "library",
 	"license"     : "MIT",
-	"description" : "perf, the PHP Extensible and Robust Framework",
+	"description" : "perf, the PHP Extensible and Robust Framework.",
 	"require"     : {
-		"php"          : ">=5.3.3",
-		"ext-mbstring" : "*"
+		"php"                  : ">=5.3.3",
+		"ext-mbstring"         : "*",
+		"perf-caching"         : "~1.0",
+		"perf-cookie"          : "~1.0",
+		"perf-emailing"        : "~1.0",
+		"perf-enumeration"     : "~1.0",
+		"perf-form"            : "~1.0",
+		"perf-logging"         : "~1.0",
+		"perf-navigation"      : "~1.0",
+		"perf-session"         : "~1.0",
+		"perf-timing"          : "~1.0",
+		"perf-type-validation" : "~1.0",
+		"perf-vc"              : "~1.0"
 	},
 	"require-dev": {
 		"ext-xdebug"                : "~2.1",
