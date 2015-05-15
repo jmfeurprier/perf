@@ -13,6 +13,7 @@
 		"perf-form"            : "~1.0",
 		"perf-logging"         : "~1.0",
 		"perf-navigation"      : "~1.0",
+		"perf-preset-string"   : "dev-master",
 		"perf-session"         : "~1.0",
 		"perf-timing"          : "~1.0",
 		"perf-type-validation" : "~1.0",
