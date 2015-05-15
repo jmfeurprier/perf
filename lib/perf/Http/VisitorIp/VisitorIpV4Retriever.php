@@ -1,21 +1,19 @@
 <?php
 
-namespace perf\Http;
-
-use \perf\String\IpV4;
+namespace perf\Http\VisitorIp;
 
 /**
  *
  *
  */
-class VisitorIpV4Retriever
+class VisitorIpV4Retriever implements VisitorIpRetriever
 {
 
     /**
-     * Attempts to retrieve current visitor IPv4 address.
+     * Attempts to retrieve current visitor IP v4 address.
      *
      * @param null|array $serverValues Values from $_SERVER superglobal variable (optional).
-     * @return IpV4 Current visitor IPv4 address.
+     * @return string
      * @throws \RuntimeException
      */
     public function retrieve(array $serverValues = null)
@@ -29,18 +27,18 @@ class VisitorIpV4Retriever
         $serverValues = $this->getServerValues($serverValues);
 
         foreach ($keys as $key) {
-            if (isset($serverValues[$key])) {
+            if (array_key_exists($key, $serverValues)) {
                 $ip = $serverValues[$key];
 
-                if (IpV4::validate($ip)) {
-                    return new IpV4($ip);
+                if (false !== filter_var($ip, \FILTER_VALIDATE_IP, \FILTER_FLAG_IPV4)) {
+                    return $ip;
                 }
 
-                throw new \RuntimeException('Invalid IP format.');
+                throw new \RuntimeException('Invalid IP v4 format.');
             }
         }
 
-        throw new \RuntimeException('Unable to retrieve visitor IP address.');
+        throw new \RuntimeException('Unable to retrieve visitor IP v4 address.');
     }
 
     /**
