@@ -11,6 +11,7 @@
 		"perf-emailing"        : "~1.0",
 		"perf-enumeration"     : "~1.0",
 		"perf-form"            : "~1.0",
+		"perf-http-status"     : "dev-master",
 		"perf-logging"         : "~1.0",
 		"perf-navigation"      : "~1.0",
 		"perf-preset-string"   : "dev-master",
