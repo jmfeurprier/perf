@@ -1,6 +1,6 @@
 <?php
 
-namespace perf\Text;
+namespace perf\Text\StringGeneration;
 
 /**
  * This class allows to generate random passwords based on specific constraints:
