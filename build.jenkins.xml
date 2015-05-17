@@ -4,21 +4,19 @@
 	<property name="rootdir" value="${project.basedir}/" override="true" />
 	<property name="bindir" value="${rootdir}vendor/bin/" override="false" />
 
-	<target name="help">
-		<echo message="Available targets" />
-		<echo message="=================" />
-		<echo message="phing build Builds project for Jenkins" />
-		<echo message="phing help  Shows this help screen" />
+	<target name="help" description="Shows available targets">
+		<exec executable="${bindir}phing" passthru="true">
+			<arg value="-f"/>
+			<arg value="${phing.file}"/>
+			<arg value="-l"/>
+		</exec>
 	</target>
 
-	<target name="build" depends="prepare,phpunit,phpcs,phpcpd,pdepend,phpmd" />
+	<target name="build" depends="prepare,lint,phpunit,phpcs,phpcpd,pdepend,phpmd" description="Builds project for Jenkins" />
 
 	<target name="prepare" depends="clean">
-		<mkdir dir="${rootdir}build/api/" />
 		<mkdir dir="${rootdir}build/coverage/" />
 		<mkdir dir="${rootdir}build/logs/" />
-		<mkdir dir="${rootdir}build/pdepend/" />
-		<mkdir dir="${rootdir}build/phpdox/" />
 	</target>
 
 	<target name="clean">
@@ -28,6 +26,15 @@
 				<delete dir="${rootdir}build/" />
 			</then>
 		</if>
+	</target>
+
+	<target name="lint" description="Performs syntax check of sourcecode files">
+		<phplint haltonfailure="true">
+			<fileset dir="${rootdir}">
+				<include name="library/"/>
+				<include name="test/unit/**/*.php"/>
+			</fileset>
+		</phplint>
 	</target>
 
 	<target name="phpunit">
@@ -43,7 +50,7 @@
 	</target>
 
 	<target name="pdepend">
-		<exec command="${bindir}pdepend --jdepend-xml=${rootdir}build/logs/jdepend.xml --jdepend-chart=${rootdir}build/pdepend/dependencies.svg --overview-pyramid=${rootdir}build/pdepend/overview-pyramid.svg ${rootdir}lib" escape="false" logoutput="true" passthru="true" />
+		<exec command="${bindir}pdepend --jdepend-xml=${rootdir}build/logs/jdepend.xml ${rootdir}lib" escape="false" logoutput="true" passthru="true" />
 	</target>
 
 	<target name="phpmd">
