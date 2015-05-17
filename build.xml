@@ -26,7 +26,7 @@
 	</target>
 
 	<target name="phpcs" description="Finds coding standard violations using PHP_CodeSniffer and print human readable output. Intended for usage on the command line before committing.">
-		<exec command="${bindir}phpcs -p --extensions=php --standard=PSR2 --report=full ${rootdir}" escape="false" logoutput="true" passthru="true" />
+		<exec command="${bindir}phpcs -p --extensions=php --standard=PSR2 --report=full ${rootdir}lib" escape="false" logoutput="true" passthru="true" />
 	</target>
 
 	<target name="phpcpd" description="Finds duplicate code using PHPCPD">
