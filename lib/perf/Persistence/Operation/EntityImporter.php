@@ -15,6 +15,28 @@ class EntityImporter
 
     /**
      *
+     *
+     * @var {string:\ReflectionClass}
+     */
+    private $reflectionClassesCache = array();
+
+    /**
+     *
+     *
+     * @var {string:{string:\ReflectionProperty}}
+     */
+    private $reflectionPropertiesCache = array();
+
+    /**
+     *
+     * Temporary property.
+     *
+     * @var string
+     */
+    private $entityClass;
+
+    /**
+     *
      * Temporary property.
      *
      * @var object
@@ -38,22 +60,21 @@ class EntityImporter
      */
     public function import(EntityMetadata $entityMetadata, array $row)
     {
-        $entityClass = $entityMetadata->getClass();
+        $this->entityClass = $entityMetadata->getClass();
+        $this->entity      = new $this->entityClass();
 
-        $this->entity = new $entityClass();
-
-        $this->loadReflectionClass($entityClass);
+        $this->loadReflectionClass();
 
         foreach ($entityMetadata->getColumns() as $column) {
-            $columnName   = $column->getColumnName();
-            $propertyName = $column->getPropertyName();
+            $columnName = $column->getColumnName();
 
             if (array_key_exists($columnName, $row)) {
-                $value = $row[$columnName];
+                $propertyName = $column->getPropertyName();
 
+                $value = $row[$columnName];
                 $value = $this->setValueType($value, $column);
 
-                $this->setPropertyValue($propertyName, $value);
+                $this->getReflectionProperty($propertyName)->setValue($this->entity, $value);
             }
         }
 
@@ -63,18 +84,17 @@ class EntityImporter
     /**
      *
      *
-     * @param string $entityClass
      * @return void
      */
-    private function loadReflectionClass($entityClass)
+    private function loadReflectionClass()
     {
-        static $cache = array();
+        if (!array_key_exists($this->entityClass, $this->reflectionClassesCache)) {
+            $reflectionClass = new \ReflectionClass($this->entityClass);
 
-        if (!array_key_exists($entityClass, $cache)) {
-            $cache[$entityClass] = new \ReflectionClass($entityClass);
+            $this->reflectionClassesCache[$this->entityClass] = $reflectionClass;
         }
 
-        $this->reflectionClass = $cache[$entityClass];
+        $this->reflectionClass = $this->reflectionClassesCache[$this->entityClass];
     }
 
     /**
@@ -86,7 +106,7 @@ class EntityImporter
      */
     private function setValueType($value, Column $column)
     {
-        if (is_null($value)) {
+        if (null === $value) {
             return null;
         }
 
@@ -111,19 +131,22 @@ class EntityImporter
      *
      *
      * @param string $propertyName
-     * @param mixed $value
-     * @return void
+     * @return \ReflectionProperty
      */
-    private function setPropertyValue($propertyName, $value)
+    private function getReflectionProperty($propertyName)
     {
+        if (isset($this->reflectionPropertiesCache[$this->entityClass][$propertyName])) {
+            return $this->reflectionPropertiesCache[$this->entityClass][$propertyName];
+        }
+
         $reflectionProperty = $this->reflectionClass->getProperty($propertyName);
 
-        if ($reflectionProperty->isPublic()) {
-            $reflectionProperty->setValue($this->entity, $value);
-        } else {
+        if (!$reflectionProperty->isPublic()) {
             $reflectionProperty->setAccessible(true);
-            $reflectionProperty->setValue($this->entity, $value);
-            $reflectionProperty->setAccessible(false);
         }
+
+        $this->reflectionPropertiesCache[$this->entityClass][$propertyName] = $reflectionProperty;
+
+        return $reflectionProperty;
     }
 }
